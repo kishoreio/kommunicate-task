@@ -12,6 +12,7 @@ const Button = styled.button`
   margin: 0 0.5rem;
   border: 1px solid #d9d9d9;
   transition: border 250ms ease-in;
+  cursor: pointer;
   &:hover {
     border: 1px solid #25c16f;
   }

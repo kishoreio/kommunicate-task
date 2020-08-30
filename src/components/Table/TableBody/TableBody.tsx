@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 const TR = styled.tr`
   border-bottom: 1px solid #ddd;
+  cursor: pointer;
   &:last-of-type {
     border-bottom: 3px solid #25c16f;
   }
@@ -19,11 +20,16 @@ const Img = styled.img`
   border-radius: 50%;
 `;
 
-const TableBody: React.FC<{ userData: UserData[] }> = ({ userData }) => {
+interface TableBody {
+  userData: UserData[];
+  getUserId: (id: number) => void;
+}
+
+const TableBody: React.FC<TableBody> = ({ userData, getUserId }) => {
   return (
     <tbody>
       {userData.map((userInfo: UserData, key: number) => (
-        <TR key={key}>
+        <TR key={key} onClick={getUserId.bind(null, userInfo.id)}>
           <TD className="avatar">
             <Img src={userInfo.avatar} alt="user_pic" />
           </TD>
