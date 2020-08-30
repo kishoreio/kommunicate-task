@@ -3,10 +3,19 @@ import Table from './components/Table/Table';
 import Pagination from './components/Pagination/Pagination';
 import SearchBar from './components/SearchBar/SearchBar';
 
+export interface UserData {
+  id: number;
+  avatar: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+}
+
 const App: React.FC = () => {
-  const [userData, setUserData] = useState<any>([]);
-  const [filterData, setFilterData] = useState<any>([]);
+  const [userData, setUserData] = useState<UserData[]>([]);
+  const [filterData, setFilterData] = useState<UserData[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+
   useEffect(() => {
     async function fetchUserData() {
       try {
@@ -27,22 +36,16 @@ const App: React.FC = () => {
     setCurrentPage(pageNo);
   };
 
-  const filterByHandler = (event: any) => {
-    const searchText = event.target.value;
-    const filteredData = userData.filter((user: any) => {
-      return (
-        user['first_name'].toLowerCase().startsWith(searchText.toLowerCase()) ||
-        user['last_name'].toLowerCase().startsWith(searchText.toLowerCase())
-      );
-    });
-    setFilterData(filteredData);
+  const getFilteredData = (data: UserData[]) => {
+    setFilterData(data);
   };
+
   return (
-    <>
-      <SearchBar filterByHandler={filterByHandler} />
+    <div>
+      <SearchBar userData={userData} getFilteredData={getFilteredData} />
       <Table userData={filterData} />
       <Pagination paginationHandler={paginationHandler} />
-    </>
+    </div>
   );
 };
 
