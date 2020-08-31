@@ -1,6 +1,7 @@
 import React from 'react';
 import { UserData } from '../../App';
 import background from '../../assets/background.png';
+import { MdAccountCircle, MdEmail } from 'react-icons/md';
 import styled from 'styled-components';
 
 const ViewUserContainer = styled.div`
@@ -11,7 +12,7 @@ const ViewUserContainer = styled.div`
   overflow: hidden;
   position: absolute;
   @media (max-width: 480px) {
-    height: 45%;
+    height: 50%;
     width: 85%;
     top: 20%;
   }
@@ -25,13 +26,15 @@ const ImageContainer = styled.div`
   background-image: url(${background});
   background-size: cover;
   background-repeat: no-repeat;
-  text-align: end;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const Img = styled.img`
-  border: 5px solid #ff5c5c;
-  width: 70px;
-  height: 70px;
+  border: 5px solid #1d6f42;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   margin: 1rem;
 `;
@@ -40,8 +43,20 @@ const DetailsContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: flex-start;
+  height: 35%;
+  padding: 1rem;
+`;
+
+const Details = styled.p`
+  display: flex;
   align-items: center;
-  height: 40%;
+`;
+
+const Title = styled.h1`
+  color: #fff;
+  font-size: 1.5rem;
+  margin-left: 1em;
 `;
 
 const ButtonContainer = styled.div`
@@ -68,12 +83,17 @@ const ViewUser: React.FC<ViewUser> = ({ userDetail, onClose }) => {
   return (
     <ViewUserContainer>
       <ImageContainer>
+        <Title>User Info</Title>
         <Img src={avatar} alt="avatar" />
       </ImageContainer>
       <DetailsContainer>
-        <p>First Name: {first_name}</p>
-        <p>Last Name: {last_name}</p>
-        <p>Email: {email}</p>
+        <Details>
+          <MdAccountCircle size="2rem" style={{ marginRight: '0.5em' }} />
+          {first_name} {last_name}
+        </Details>
+        <Details>
+          <MdEmail size="2rem" style={{ marginRight: '0.5em' }} /> {email}
+        </Details>
       </DetailsContainer>
       <ButtonContainer>
         <Button onClick={onClose}>Close</Button>
