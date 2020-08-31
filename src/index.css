@@ -16,4 +16,14 @@
 
 body {
   font-family: 'Poppins', sans-serif;
+  background: url('./assets/bg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+@media (max-width: 480px) {
+  #root {
+    display: block;
+  }
 }
