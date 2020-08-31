@@ -7,6 +7,9 @@ const Div = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 1rem 0;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const Heading = styled.h1`
@@ -18,6 +21,11 @@ const SearchInput = styled.input`
   outline: none;
   height: 2rem;
   text-indent: 0.5rem;
+  @media (max-width: 768px) {
+    height: 3rem;
+    width: 60%;
+    margin: 0.5rem 0;
+  }
 `;
 
 interface SearchBar {
@@ -34,11 +42,9 @@ const SearchBar: React.FC<SearchBar> = ({ userData, getFilteredData }) => {
 
   const filterByName = () => {
     const searchText = inputRef!.current.value;
-    const filteredData = userData.filter((user: any) => {
-      return (
-        user['first_name'].toLowerCase().startsWith(searchText.toLowerCase()) ||
-        user['last_name'].toLowerCase().startsWith(searchText.toLowerCase())
-      );
+    const filteredData = userData.filter((user: UserData) => {
+      const fullName = `${user.first_name.toLowerCase()} ${user.last_name.toLowerCase()}`;
+      return fullName.includes(searchText.trim().toLowerCase());
     });
     getFilteredData(filteredData);
   };
@@ -48,7 +54,7 @@ const SearchBar: React.FC<SearchBar> = ({ userData, getFilteredData }) => {
       <Heading>Users List</Heading>
       <SearchInput
         type="text"
-        placeholder="Search by name fix issue"
+        placeholder="Search"
         ref={inputRef}
         onChange={filterByName}
       />
