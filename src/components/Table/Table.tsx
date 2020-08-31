@@ -6,11 +6,23 @@ import Modal from '../Modal/Modal';
 import ViewUser from '../ViewUser/ViewUser';
 import styled from 'styled-components';
 
+const Div = styled.div`
+  overflow-x: auto;
+`;
+
 const TableWrapper = styled.table`
   border-collapse: collapse;
-  margin: 25px 0;
+  margin: 1rem 0;
   min-width: 800px;
   font-size: 0.9rem;
+  @media (max-width: 768px) {
+    min-width: 0px;
+    margin: 0 0 1rem;
+  }
+`;
+
+const Text = styled.p`
+  text-align: center;
 `;
 
 const Table: React.FC<{ userData: UserData[] }> = ({ userData }) => {
@@ -23,7 +35,7 @@ const Table: React.FC<{ userData: UserData[] }> = ({ userData }) => {
     setUserDetail(null);
   };
   return (
-    <>
+    <Div>
       <TableWrapper>
         <TableHead />
         <TableBody userData={userData} getUserId={getUserId} />
@@ -33,7 +45,8 @@ const Table: React.FC<{ userData: UserData[] }> = ({ userData }) => {
           <ViewUser userDetail={userDetail} onClose={closeModal} />
         </Modal>
       )}
-    </>
+      {userData.length === 0 ? <Text>No User</Text> : null}
+    </Div>
   );
 };
 

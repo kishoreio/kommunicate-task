@@ -44,7 +44,7 @@ const App: React.FC = () => {
     <div>
       <SearchBar userData={userData} getFilteredData={getFilteredData} />
       <Table userData={filterData} />
-      <Pagination paginationHandler={paginationHandler} />
+      <Pagination pageNo={currentPage} paginationHandler={paginationHandler} />
     </div>
   );
 };

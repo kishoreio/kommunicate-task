@@ -4,12 +4,21 @@ import background from '../../assets/background.png';
 import styled from 'styled-components';
 
 const ViewUserContainer = styled.div`
-  width: 30%;
-  height: 45%;
+  width: 25%;
+  height: 40%;
   background: #fff;
   border-radius: 5px;
   overflow: hidden;
   position: absolute;
+  @media (max-width: 480px) {
+    height: 45%;
+    width: 85%;
+    top: 20%;
+  }
+  @media (min-width: 480px) and (max-width: 1024px) {
+    width: 45%;
+    height: 35%;
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -21,8 +30,8 @@ const ImageContainer = styled.div`
 
 const Img = styled.img`
   border: 5px solid #ff5c5c;
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   margin: 1rem;
 `;
